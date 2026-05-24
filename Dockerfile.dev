@@ -1,0 +1,19 @@
+# syntax=docker/dockerfile:1.7
+#
+# Development Dockerfile for findyourdistro.
+#
+# Use this with compose.dev.yml. Source is mounted as a volume so
+# changes hot-reload via Vite. No build step here.
+
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Only copy package files first to leverage Docker layer cache
+COPY package.json package-lock.json* ./
+RUN npm ci --no-audit --no-fund
+
+# The source is mounted as a volume at runtime; nothing else to copy.
+EXPOSE 5173
+
+CMD ["npm", "run", "dev"]

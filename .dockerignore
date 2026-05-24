@@ -1,0 +1,29 @@
+# Don't ship these into Docker builds
+node_modules
+dist
+build
+.git
+.gitignore
+.dockerignore
+Dockerfile*
+docker-compose*.yml
+compose*.yml
+docker/
+
+# Editor
+.vscode
+.idea
+*.swp
+.DS_Store
+
+# Docs
+README.md
+LICENSE
+*.md
+
+# Logs
+*.log
+npm-debug.log*
+
+# Env
+.env*

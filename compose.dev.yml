@@ -1,0 +1,29 @@
+# Development compose file for findyourdistro.
+#
+# Usage:
+#   docker compose -f compose.dev.yml up
+#
+# Hot reload works through the mounted source volume. Visit
+# http://localhost:5173 to see the app.
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: findyourdistro-dev:latest
+    container_name: findyourdistro-dev
+    ports:
+      - "5173:5173"
+    volumes:
+      # Mount source so Vite picks up changes
+      - .:/app
+      # But keep node_modules from the image (so we don't overwrite them
+      # with the host's possibly-different OS binaries)
+      - /app/node_modules
+    environment:
+      # Vite polling is set in vite.config.js; CHOKIDAR_USEPOLLING here
+      # is a belt-and-suspenders fallback for some Docker setups.
+      - CHOKIDAR_USEPOLLING=true
+    stdin_open: true
+    tty: true

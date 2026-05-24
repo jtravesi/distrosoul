@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    /* Subtle starry-night background — like the PMD intro skies */
+    background-color: theme('colors.bg.deep');
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, rgba(244, 236, 216, 0.4) 50%, transparent 50%),
+      radial-gradient(1px 1px at 80% 70%, rgba(244, 236, 216, 0.3) 50%, transparent 50%),
+      radial-gradient(1px 1px at 40% 80%, rgba(244, 236, 216, 0.5) 50%, transparent 50%),
+      radial-gradient(1px 1px at 70% 20%, rgba(244, 236, 216, 0.2) 50%, transparent 50%),
+      radial-gradient(1px 1px at 90% 50%, rgba(244, 236, 216, 0.4) 50%, transparent 50%),
+      radial-gradient(2px 2px at 30% 60%, rgba(244, 201, 93, 0.3) 50%, transparent 50%),
+      radial-gradient(1px 1px at 60% 40%, rgba(244, 236, 216, 0.3) 50%, transparent 50%);
+    background-size: 400px 400px, 350px 350px, 500px 500px, 450px 450px, 380px 380px, 600px 600px, 320px 320px;
+    background-repeat: repeat;
+  }
+
+  body {
+    @apply font-body text-ink min-h-screen;
+    /* Pixel-perfect rendering: keep text crisp on retina */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Disable image smoothing for any pixel art we add later */
+  img.pixel {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+  }
+}
+
+@layer components {
+  /* The classic PMD dialogue box: navy fill, cream border, double frame */
+  .dialogue-box {
+    @apply relative bg-bg-panel border-4 border-ink p-6 md:p-8;
+    box-shadow:
+      0 0 0 2px theme('colors.bg.deep'),
+      0 0 0 6px theme('colors.ink.DEFAULT'),
+      0 8px 0 6px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Pixel-art arrow indicator (▼) for "click to continue" */
+  .dialogue-arrow::after {
+    content: '▼';
+    @apply absolute bottom-2 right-4 text-accent-gold animate-blink;
+  }
+
+  /* Choice button: looks like a PMD menu option */
+  .choice-button {
+    @apply w-full text-left px-5 py-3 md:px-6 md:py-4
+           bg-bg-panel border-2 border-border-dim text-ink
+           font-body text-lg md:text-xl
+           transition-all duration-150 ease-out
+           hover:border-ink hover:bg-bg hover:text-accent-gold
+           hover:translate-x-1
+           focus:outline-none focus:border-accent-gold focus:text-accent-gold
+           active:translate-y-px;
+    cursor: pointer;
+  }
+
+  .choice-button::before {
+    content: '▶ ';
+    @apply text-accent-gold opacity-0 transition-opacity duration-150;
+  }
+
+  .choice-button:hover::before,
+  .choice-button:focus::before {
+    @apply opacity-100;
+  }
+
+  /* Display title (used for the reveal) */
+  .display-title {
+    @apply font-display text-accent-gold leading-relaxed;
+    text-shadow:
+      2px 2px 0 theme('colors.bg.deep'),
+      4px 4px 0 rgba(0, 0, 0, 0.5);
+  }
+}
+
+@layer utilities {
+  /* Typewriter cursor */
+  .text-cursor::after {
+    content: '|';
+    @apply animate-blink text-accent-gold;
+  }
+}
