@@ -1,25 +1,49 @@
 /**
  * Final question — always shown last, after the 8 random questions.
  *
- * Its answer does NOT score personality points. Instead it picks a
- * tie-break path within the winning nature's distro family:
+ * Awards no nature points; the chosen option's `path` picks which distro
+ * within the winning nature's family.
  *
  *   forward → head-on, drive
  *   plan    → with a clear plan
  *   help    → with people around
  *   pace    → at my own pace
- *
- * Each nature has a distro mapped to each of these four paths. See
- * lib/scoring.js for the full mapping.
  */
 
 export const finalQuestion = {
   id: 'final',
-  text: "When the road gets hard, what keeps you going?",
+  text: {
+    en: "When the road gets hard, what keeps you going?",
+    es: "Cuando el camino se pone difícil, ¿qué te empuja a seguir?",
+  },
   options: [
-    { text: "The drive to see how far I can go.", path: 'forward' },
-    { text: "Knowing exactly where I am and where I'm headed.", path: 'plan' },
-    { text: "The people who walk beside me.", path: 'help' },
-    { text: "Knowing there's no rush — the road is mine.", path: 'pace' },
+    {
+      text: {
+        en: "The drive to see how far I can go.",
+        es: "Las ganas de ver hasta dónde puedo llegar.",
+      },
+      path: 'forward',
+    },
+    {
+      text: {
+        en: "Knowing exactly where I am and where I'm headed.",
+        es: "Saber exactamente dónde estoy y a dónde voy.",
+      },
+      path: 'plan',
+    },
+    {
+      text: {
+        en: "The people who walk beside me.",
+        es: "La gente que me acompaña.",
+      },
+      path: 'help',
+    },
+    {
+      text: {
+        en: "Knowing there's no rush — the road is mine.",
+        es: "Saber que no hay prisa, que el camino es mío.",
+      },
+      path: 'pace',
+    },
   ],
 };

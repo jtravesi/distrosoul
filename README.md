@@ -6,10 +6,7 @@ The user takes a short quiz of situational, emotional questions — never about 
 
 ## Live
 
-🌐 _Coming soon — Cloudflare Pages deploy in progress._
-
-<!-- Once deployed, replace this section with: -->
-<!-- 🌐 **[distrosoul.example.com](https://distrosoul.example.com)** -->
+🌐 **[distrosoul.jtravesi.workers.dev](https://distrosoul.jtravesi.workers.dev/)**
 
 ## Stack
 

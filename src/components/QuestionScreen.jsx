@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import TextBox from './TextBox';
 import Choices from './Choices';
+import { useLanguage } from '../lib/LanguageContext';
 
 /**
  * Shows one personality question with its 4 options.
@@ -9,6 +10,7 @@ import Choices from './Choices';
  */
 export default function QuestionScreen({ question, index, total, onAnswer }) {
   const [choicesReady, setChoicesReady] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center px-4 py-12 gap-6">
@@ -17,7 +19,7 @@ export default function QuestionScreen({ question, index, total, onAnswer }) {
       </p>
 
       <TextBox
-        text={question.text}
+        text={t(question.text)}
         onDone={() => setChoicesReady(true)}
       />
 

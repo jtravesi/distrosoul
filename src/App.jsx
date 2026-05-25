@@ -7,6 +7,7 @@ import FinalQuestionScreen from './components/FinalQuestionScreen';
 import RevealScreen from './components/RevealScreen';
 import AboutScreen from './components/AboutScreen';
 import SoundToggle from './components/SoundToggle';
+import LanguageToggle from './components/LanguageToggle';
 
 import { questions } from './data/questions';
 import { finalQuestion } from './data/finalQuestion';
@@ -115,6 +116,7 @@ export default function App() {
 
   return (
     <>
+      <LanguageToggle />
       <SoundToggle />
       <AnimatePresence mode="wait">
         <motion.div

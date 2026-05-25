@@ -1,6 +1,15 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import TextBox from './TextBox';
+import { useLanguage } from '../lib/LanguageContext';
+import { NATURE_NAMES } from '../lib/scoring';
+
+const YOU_ARE = { en: 'You are', es: 'Eres' };
+const COMPANION = {
+  en: 'Your companion has revealed itself.',
+  es: 'Tu compañero se ha revelado.',
+};
+const START_OVER = { en: 'Start over', es: 'Empezar de nuevo' };
 
 /**
  * The dramatic reveal. Three stages:
@@ -13,6 +22,7 @@ export default function RevealScreen({ reveal, onRestart }) {
   const [stage, setStage] = useState(1);
   const [flashing, setFlashing] = useState(false);
   const [revealTextReady, setRevealTextReady] = useState(false);
+  const { t } = useLanguage();
 
   // Stage 2: hold the typewriter back so the distro name lands first.
   useEffect(() => {
@@ -27,7 +37,6 @@ export default function RevealScreen({ reveal, onRestart }) {
   const goToDistroReveal = () => {
     setStage(2);
     setFlashing(true);
-    // Flash lifecycle finishes ~950ms after triggering.
     setTimeout(() => setFlashing(false), 950);
   };
 
@@ -54,14 +63,14 @@ export default function RevealScreen({ reveal, onRestart }) {
             transition={{ duration: 0.5, ease: 'easeOut' }}
           >
             <p className="font-body text-ink-dim text-xs md:text-sm tracking-widest uppercase mb-2">
-              You are
+              {t(YOU_ARE)}
             </p>
             <h2 className="display-title text-xl md:text-3xl">
-              {reveal.nature}
+              {t(NATURE_NAMES[reveal.nature])}
             </h2>
           </motion.div>
           <TextBox
-            text={reveal.natureText}
+            text={t(reveal.natureText)}
             onContinue={goToDistroReveal}
           />
         </>
@@ -85,7 +94,7 @@ export default function RevealScreen({ reveal, onRestart }) {
               className="w-full flex justify-center"
             >
               <TextBox
-                text={reveal.revealText}
+                text={t(reveal.revealText)}
                 onContinue={() => setStage(3)}
               />
             </motion.div>
@@ -109,7 +118,7 @@ export default function RevealScreen({ reveal, onRestart }) {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Your companion has revealed itself.
+            {t(COMPANION)}
           </motion.p>
           <motion.button
             type="button"
@@ -119,7 +128,7 @@ export default function RevealScreen({ reveal, onRestart }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.5 }}
           >
-            Start over
+            {t(START_OVER)}
           </motion.button>
         </>
       )}

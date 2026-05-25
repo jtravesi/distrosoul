@@ -19,6 +19,17 @@ export const NATURES = [
   'Curious',
 ];
 
+// Display labels for each nature ID. The IDs above stay in English
+// because they're internal keys; this map is only for UI rendering.
+export const NATURE_NAMES = {
+  Restless: { en: 'Restless', es: 'Inquieto' },
+  Serene:   { en: 'Serene',   es: 'Sereno' },
+  Stoic:    { en: 'Stoic',    es: 'Estoico' },
+  Dreamer:  { en: 'Dreamer',  es: 'Soñador' },
+  Cautious: { en: 'Cautious', es: 'Cauteloso' },
+  Curious:  { en: 'Curious',  es: 'Curioso' },
+};
+
 // nature × path → distro id (key into reveals.js).
 // Restless × help is intentionally empty; calculateResult falls back to
 // EndeavourOS (Restless × pace) as the neighbour suggested in the brief.

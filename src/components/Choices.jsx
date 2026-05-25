@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useLanguage } from '../lib/LanguageContext';
 
 /**
  * PMD-style choice menu. Renders a vertical list of options as
@@ -8,6 +9,7 @@ import { motion } from 'framer-motion';
  * like it's being laid out rather than dumped on screen.
  */
 export default function Choices({ options, onSelect, disabled = false }) {
+  const { t } = useLanguage();
   return (
     <ul className="space-y-2 md:space-y-3 max-w-2xl w-full">
       {options.map((option, index) => (
@@ -27,7 +29,7 @@ export default function Choices({ options, onSelect, disabled = false }) {
             disabled={disabled}
             onClick={() => onSelect?.(option, index)}
           >
-            {option.text}
+            {t(option.text)}
           </button>
         </motion.li>
       ))}

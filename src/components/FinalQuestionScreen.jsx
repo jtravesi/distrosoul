@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import TextBox from './TextBox';
 import Choices from './Choices';
+import { useLanguage } from '../lib/LanguageContext';
+
+const LAST_QUESTION = { en: 'Last question', es: 'Última pregunta' };
 
 /**
  * The fixed final question. Its options carry a `path` (forward / plan /
@@ -9,15 +12,16 @@ import Choices from './Choices';
  */
 export default function FinalQuestionScreen({ question, onAnswer }) {
   const [choicesReady, setChoicesReady] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center px-4 py-12 gap-6">
       <p className="font-display text-accent-gold text-xs md:text-sm tracking-widest">
-        Last question
+        {t(LAST_QUESTION)}
       </p>
 
       <TextBox
-        text={question.text}
+        text={t(question.text)}
         onDone={() => setChoicesReady(true)}
       />
 
