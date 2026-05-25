@@ -1,0 +1,8 @@
+# Cloudflare Pages SPA fallback.
+# Reference: https://developers.cloudflare.com/pages/configuration/redirects/
+#
+# Any path that isn't a real file falls back to index.html so React
+# handles client-side routing. The "200" makes this a rewrite, not a
+# redirect — the URL stays clean.
+
+/*    /index.html   200

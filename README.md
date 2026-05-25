@@ -98,14 +98,14 @@ Each `nature × path` combination maps to a concrete distro. The full mapping:
 
 | Nature | `forward` | `plan` | `help` | `pace` |
 |---|---|---|---|---|
-| **Restless** | Arch Linux | Gentoo | — | EndeavourOS |
+| **Restless** | Arch Linux | Gentoo | EndeavourOS | EndeavourOS |
 | **Serene** | Pop!_OS | Manjaro | Ubuntu | Linux Mint |
 | **Stoic** | Slackware | Debian | openSUSE Leap | MX Linux |
 | **Dreamer** | Garuda Linux | Pop!_OS | Zorin OS | elementary OS |
 | **Cautious** | Tails | Qubes OS | Parrot Home | Whonix |
 | **Curious** | CachyOS | openSUSE Tumbleweed | Fedora | NixOS |
 
-That's **23 cells covering 22 distinct distros** — Pop!_OS appears in both Serene and Dreamer with two different reveal texts, reflecting its dual personality. **Restless × `help` is intentionally empty**: if the scoring lands there, it falls back to EndeavourOS (Restless × `pace`) as the neighbour suggested in the design brief.
+That's **23 cells covering 22 distinct distros** — Pop!_OS appears in both Serene and Dreamer with two different reveal texts, reflecting its dual personality. The **Restless × `help`** cell has no dedicated distro: if the scoring lands there it falls back to EndeavourOS (Restless × `pace`) as the closest neighbour.
 
 A coverage script verifies that every reveal text is reachable and reports the empirical distribution under random play:
 
@@ -113,8 +113,6 @@ A coverage script verifies that every reveal text is reachable and reports the e
 node scripts/coverage.mjs              # default: 10k random runs
 node scripts/coverage.mjs --runs 50000 # bigger sample
 ```
-
-After the rebalance in Phase 3, all six natures sit within a 15.4–18.1% empirical band (ideal: 16.7%).
 
 ## Project structure
 

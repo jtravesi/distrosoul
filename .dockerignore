@@ -9,6 +9,8 @@ Dockerfile*
 docker-compose*.yml
 compose*.yml
 docker/
+# ...but the production Dockerfile copies nginx.conf from there at build time.
+!docker/nginx.conf
 
 # Editor
 .vscode
