@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.7
 #
-# Production Dockerfile for findyourdistro.
+# Production Dockerfile for distrosoul.
 #
 # Multi-stage build:
 #   1. builder: Node + Vite to produce static files

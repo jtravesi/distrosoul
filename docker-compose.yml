@@ -1,4 +1,4 @@
-# Production compose file for findyourdistro.
+# Production compose file for distrosoul.
 #
 # Usage:
 #   docker compose up -d --build
@@ -11,8 +11,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: findyourdistro:latest
-    container_name: findyourdistro
+    image: distrosoul:latest
+    container_name: distrosoul
     restart: unless-stopped
     ports:
       - "${HOST_PORT:-8080}:80"

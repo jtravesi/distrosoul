@@ -17,7 +17,7 @@ import { calculateResult } from './lib/scoring';
 const QUESTION_COUNT = 8;
 
 /**
- * findyourdistro state machine.
+ * distrosoul state machine.
  *
  * Phases:
  *   intro    → welcome dialogue, link to About, click to start

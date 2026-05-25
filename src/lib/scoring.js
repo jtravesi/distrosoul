@@ -1,5 +1,5 @@
 /**
- * Scoring for findyourdistro.
+ * Scoring for distrosoul.
  *
  *   pickNature(answeredOptions) → winning nature (ties broken randomly)
  *   pickDistro(nature, path)    → distro id from the nature × path matrix

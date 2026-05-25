@@ -1,4 +1,4 @@
-# Development compose file for findyourdistro.
+# Development compose file for distrosoul.
 #
 # Usage:
 #   docker compose -f compose.dev.yml up
@@ -11,8 +11,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    image: findyourdistro-dev:latest
-    container_name: findyourdistro-dev
+    image: distrosoul-dev:latest
+    container_name: distrosoul-dev
     ports:
       - "5173:5173"
     volumes:

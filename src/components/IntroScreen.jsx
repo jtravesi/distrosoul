@@ -10,7 +10,7 @@ export default function IntroScreen({ onStart, onAbout }) {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center px-4 py-12 relative">
       <h1 className="display-title text-2xl md:text-4xl mb-2 text-center">
-        findyourdistro
+        distrosoul
       </h1>
       <p className="font-body text-ink-dim text-sm md:text-base mb-12 tracking-widest uppercase">
         a Pokémon Mystery Dungeon-style test

@@ -1,5 +1,5 @@
 /**
- * Question pool for findyourdistro.
+ * Question pool for distrosoul.
  *
  * Shape:
  *   {
