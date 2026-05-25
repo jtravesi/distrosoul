@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "license": "MIT",
   "description": "A Pokémon Mystery Dungeon-style personality quiz that recommends your ideal Linux distro",
   "scripts": {
     "dev": "vite",

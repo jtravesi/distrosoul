@@ -151,5 +151,5 @@ distrosoul/
 
 ## License
 
-Currently no license — all rights reserved while the project is private.
-We plan to release under **MIT** when the project goes public.
+Released under the [MIT License](LICENSE) — feel free to fork, modify, and
+share. Attribution appreciated but not required.
