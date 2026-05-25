@@ -1,9 +1,12 @@
 import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import IntroScreen from './components/IntroScreen';
 import QuestionScreen from './components/QuestionScreen';
 import FinalQuestionScreen from './components/FinalQuestionScreen';
 import RevealScreen from './components/RevealScreen';
+import AboutScreen from './components/AboutScreen';
+import SoundToggle from './components/SoundToggle';
 
 import { questions } from './data/questions';
 import { finalQuestion } from './data/finalQuestion';
@@ -14,11 +17,12 @@ import { calculateResult } from './lib/scoring';
 const QUESTION_COUNT = 8;
 
 /**
- * findyourdistro — Phase 3 state machine.
+ * findyourdistro state machine.
  *
  * Phases:
- *   intro    → welcome dialogue, click to start
- *   question → 8 random personality questions, one per phase tick
+ *   intro    → welcome dialogue, link to About, click to start
+ *   about    → why-this-exists + privacy statement, back to intro
+ *   question → 8 random personality questions, one per tick
  *   final    → fixed tie-break question
  *   reveal   → nature text, then distro reveal, then restart
  */
@@ -62,37 +66,67 @@ export default function App() {
     setResultId(null);
   };
 
-  if (phase === 'intro') {
-    return <IntroScreen onStart={startQuiz} />;
-  }
+  const renderScreen = () => {
+    if (phase === 'intro') {
+      return (
+        <IntroScreen
+          onStart={startQuiz}
+          onAbout={() => setPhase('about')}
+        />
+      );
+    }
 
-  if (phase === 'question') {
-    const question = shownQuestions[currentIndex];
-    return (
-      <QuestionScreen
-        key={question.id}
-        question={question}
-        index={currentIndex}
-        total={shownQuestions.length}
-        onAnswer={handleQuestionAnswer}
-      />
-    );
-  }
+    if (phase === 'about') {
+      return <AboutScreen onBack={() => setPhase('intro')} />;
+    }
 
-  if (phase === 'final') {
-    return (
-      <FinalQuestionScreen
-        question={finalQuestion}
-        onAnswer={handleFinalAnswer}
-      />
-    );
-  }
+    if (phase === 'question') {
+      const question = shownQuestions[currentIndex];
+      return (
+        <QuestionScreen
+          question={question}
+          index={currentIndex}
+          total={shownQuestions.length}
+          onAnswer={handleQuestionAnswer}
+        />
+      );
+    }
 
-  // phase === 'reveal'
-  const reveal = resultId ? reveals[resultId] : null;
-  if (!reveal) {
-    // Should not happen, but degrade gracefully.
-    return <IntroScreen onStart={startQuiz} />;
-  }
-  return <RevealScreen reveal={reveal} onRestart={restart} />;
+    if (phase === 'final') {
+      return (
+        <FinalQuestionScreen
+          question={finalQuestion}
+          onAnswer={handleFinalAnswer}
+        />
+      );
+    }
+
+    const reveal = resultId ? reveals[resultId] : null;
+    if (!reveal) {
+      return <IntroScreen onStart={startQuiz} onAbout={() => setPhase('about')} />;
+    }
+    return <RevealScreen reveal={reveal} onRestart={restart} />;
+  };
+
+  // Unique key per screen so AnimatePresence detects swaps — questions
+  // include their index so we get a transition between each one.
+  const screenKey =
+    phase === 'question' ? `question-${currentIndex}` : phase;
+
+  return (
+    <>
+      <SoundToggle />
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={screenKey}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -12 }}
+          transition={{ duration: 0.35, ease: 'easeOut' }}
+        >
+          {renderScreen()}
+        </motion.div>
+      </AnimatePresence>
+    </>
+  );
 }

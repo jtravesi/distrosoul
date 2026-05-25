@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSound } from '../lib/SoundContext';
 
 /**
  * PMD-style dialogue box with typewriter effect.
@@ -22,6 +23,7 @@ export default function TextBox({
 }) {
   const [displayed, setDisplayed] = useState('');
   const [done, setDone] = useState(false);
+  const { playBlip } = useSound();
 
   useEffect(() => {
     setDisplayed('');
@@ -31,7 +33,10 @@ export default function TextBox({
   useEffect(() => {
     if (displayed.length < text.length) {
       const timeout = setTimeout(() => {
+        const nextChar = text.charAt(displayed.length);
         setDisplayed(text.slice(0, displayed.length + 1));
+        // Skip blips for whitespace so spaces don't feel mechanical.
+        if (/\S/.test(nextChar)) playBlip();
       }, speed);
       return () => clearTimeout(timeout);
     }
@@ -39,7 +44,7 @@ export default function TextBox({
       setDone(true);
       onDone?.();
     }
-  }, [displayed, text, speed, done, onDone]);
+  }, [displayed, text, speed, done, onDone, playBlip]);
 
   const advance = () => {
     if (!done) {
@@ -66,7 +71,7 @@ export default function TextBox({
       tabIndex={isInteractive ? 0 : undefined}
       onClick={isInteractive ? advance : undefined}
       onKeyDown={isInteractive ? handleKeyDown : undefined}
-      className={`dialogue-box max-w-2xl w-full select-none ${
+      className={`dialogue-box max-w-2xl w-full select-none focus:outline-none focus-visible:outline-none ${
         isInteractive ? 'cursor-pointer' : ''
       } ${showArrow ? 'dialogue-arrow' : ''} ${className}`.trim()}
     >
