@@ -1,29 +1,25 @@
 /**
- * Final question — fixed, always shown last after the 8 random questions.
+ * Final question — always shown last, after the 8 random questions.
  *
- * Its answer does NOT score personality points: it determines the
- * tie-break path within the winning nature's distro family.
+ * Its answer does NOT score personality points. Instead it picks a
+ * tie-break path within the winning nature's distro family:
  *
- * The four paths are:
- *   - 'frente'  → de frente
- *   - 'plan'    → con un plan
- *   - 'ayuda'   → pidiendo ayuda
- *   - 'ritmo'   → a mi ritmo
+ *   forward → head-on, drive
+ *   plan    → with a clear plan
+ *   help    → with people around
+ *   pace    → at my own pace
  *
- * Each nature has a distro mapped to each of these four paths.
- * See lib/scoring.js for the full mapping.
- *
- * NOTE: Placeholder for Phase 3.
+ * Each nature has a distro mapped to each of these four paths. See
+ * lib/scoring.js for the full mapping.
  */
 
 export const finalQuestion = {
   id: 'final',
-  text: 'Cuando el camino se pone difícil, ¿qué te empuja a seguir?',
+  text: "When the road gets hard, what keeps you going?",
   options: [
-    // TODO: populate options with their tie-break paths.
-    // { text: '...', path: 'frente' },
-    // { text: '...', path: 'plan' },
-    // { text: '...', path: 'ayuda' },
-    // { text: '...', path: 'ritmo' },
+    { text: "The drive to see how far I can go.", path: 'forward' },
+    { text: "Knowing exactly where I am and where I'm headed.", path: 'plan' },
+    { text: "The people who walk beside me.", path: 'help' },
+    { text: "Knowing there's no rush — the road is mine.", path: 'pace' },
   ],
 };

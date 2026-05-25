@@ -1,43 +1,59 @@
 /**
- * Scoring logic for findyourdistro.
+ * Scoring for findyourdistro.
  *
- * Inputs:
- *   - The user's answers (array of selected option indexes for each shown question)
- *   - The list of shown questions (8 random + 1 final)
+ *   pickNature(answeredOptions) → winning nature (ties broken randomly)
+ *   pickDistro(nature, path)    → distro id from the nature × path matrix
+ *   calculateResult(answeredOptions, finalPath) → distro id (end-to-end)
  *
- * Output:
- *   - The chosen distro id
- *
- * Algorithm:
- *   1. Sum points across the 8 personality questions to find the winning nature.
- *   2. Ties are broken randomly (PMD-style).
- *   3. The final question's path determines which distro within the winning
- *      nature's family is assigned.
- *
- * NOTE: Placeholder for Phase 3.
+ * Inputs are the option objects the user picked, not indexes. Each option's
+ * `points` is a partial map { Restless?: n, Serene?: n, ... } — missing
+ * natures count as zero.
  */
 
-// The 6 personality natures
 export const NATURES = [
-  'Inquieto',
-  'Sereno',
-  'Estoico',
-  'Sonador',
-  'Cauteloso',
-  'Curioso',
+  'Restless',
+  'Serene',
+  'Stoic',
+  'Dreamer',
+  'Cautious',
+  'Curious',
 ];
 
-// Mapping nature + tie-break path → distro id
-// Will be filled with the 22-distro mapping designed in the planning phase.
+// nature × path → distro id (key into reveals.js).
+// Restless × help is intentionally empty; calculateResult falls back to
+// EndeavourOS (Restless × pace) as the neighbour suggested in the brief.
 export const distroMap = {
-  // Example shape (placeholder):
-  // Inquieto: { frente: 'arch', plan: 'gentoo', ayuda: '...', ritmo: 'endeavouros' },
+  Restless: { forward: 'arch',          plan: 'gentoo',              help: null,            pace: 'endeavouros' },
+  Serene:   { forward: 'pop_os_serene', plan: 'manjaro',             help: 'ubuntu',        pace: 'mint' },
+  Stoic:    { forward: 'slackware',     plan: 'debian',              help: 'opensuse_leap', pace: 'mx_linux' },
+  Dreamer:  { forward: 'garuda',        plan: 'pop_os_dreamer',      help: 'zorin',         pace: 'elementary' },
+  Cautious: { forward: 'tails',         plan: 'qubes',               help: 'parrot',        pace: 'whonix' },
+  Curious:  { forward: 'cachyos',       plan: 'opensuse_tumbleweed', help: 'fedora',        pace: 'nixos' },
 };
 
-export function calculateResult(answers, shownQuestions, finalAnswer) {
-  // TODO: implement scoring in Phase 3.
-  void answers;
-  void shownQuestions;
-  void finalAnswer;
-  return null;
+export function pickNature(answeredOptions) {
+  const totals = Object.fromEntries(NATURES.map((n) => [n, 0]));
+  for (const option of answeredOptions) {
+    if (!option?.points) continue;
+    for (const [nature, value] of Object.entries(option.points)) {
+      if (nature in totals) totals[nature] += value;
+    }
+  }
+
+  const max = Math.max(...Object.values(totals));
+  const winners = NATURES.filter((n) => totals[n] === max);
+  return winners[Math.floor(Math.random() * winners.length)];
+}
+
+export function pickDistro(nature, path) {
+  const row = distroMap[nature];
+  if (!row) return null;
+  // Restless × help fallback → EndeavourOS (Restless × pace).
+  if (nature === 'Restless' && path === 'help') return row.pace;
+  return row[path] ?? null;
+}
+
+export function calculateResult(answeredOptions, finalPath) {
+  const nature = pickNature(answeredOptions);
+  return pickDistro(nature, finalPath);
 }

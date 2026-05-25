@@ -1,15 +1,13 @@
 /**
- * Random selection of N questions from the pool.
+ * Pick `n` items from `pool` uniformly at random, returned in random order.
  *
- * Uses Fisher-Yates shuffle for unbiased sampling.
- * Returns a shuffled subset of the questions array.
- *
- * NOTE: Placeholder for Phase 3.
+ * Fisher-Yates on a shallow copy — the input pool is not mutated.
  */
-
 export function selectQuestions(pool, n = 8) {
-  // TODO: implement in Phase 3.
-  void pool;
-  void n;
-  return [];
+  const copy = pool.slice();
+  for (let i = copy.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy.slice(0, Math.min(n, copy.length));
 }

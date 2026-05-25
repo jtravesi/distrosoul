@@ -1,63 +1,98 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+
+import IntroScreen from './components/IntroScreen';
+import QuestionScreen from './components/QuestionScreen';
+import FinalQuestionScreen from './components/FinalQuestionScreen';
+import RevealScreen from './components/RevealScreen';
+
+import { questions } from './data/questions';
+import { finalQuestion } from './data/finalQuestion';
+import { reveals } from './data/reveals';
+import { selectQuestions } from './lib/selectQuestions';
+import { calculateResult } from './lib/scoring';
+
+const QUESTION_COUNT = 8;
 
 /**
- * findyourdistro — Phase 1 hello screen.
+ * findyourdistro — Phase 3 state machine.
  *
- * This is the entry point of the app. For now it shows a PMD-style
- * dialogue box with the project title and a placeholder message.
- *
- * Next phases will replace this with:
- *   - IntroScreen (welcome + start button)
- *   - QuestionScreen (one of 8 random questions from the pool)
- *   - FinalQuestionScreen (the "camino difícil" question)
- *   - RevealScreen (the dramatic distro reveal)
- *   - AboutScreen (why this exists)
+ * Phases:
+ *   intro    → welcome dialogue, click to start
+ *   question → 8 random personality questions, one per phase tick
+ *   final    → fixed tie-break question
+ *   reveal   → nature text, then distro reveal, then restart
  */
 export default function App() {
-  const fullText =
-    'Who are you, traveler? Before continuing your journey, ' +
-    'you must answer a few questions. Your answers ' +
-    'will reveal which Linux distribution resonates ' +
-    'with your soul...';
+  const [phase, setPhase] = useState('intro');
+  const [shownQuestions, setShownQuestions] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [answeredOptions, setAnsweredOptions] = useState([]);
+  const [resultId, setResultId] = useState(null);
 
-  const [displayedText, setDisplayedText] = useState('');
-  const [isTyping, setIsTyping] = useState(true);
+  const startQuiz = () => {
+    setShownQuestions(selectQuestions(questions, QUESTION_COUNT));
+    setCurrentIndex(0);
+    setAnsweredOptions([]);
+    setResultId(null);
+    setPhase('question');
+  };
 
-  // Typewriter effect: characters appear one at a time, PMD-style
-  useEffect(() => {
-    if (displayedText.length < fullText.length) {
-      const timeout = setTimeout(() => {
-        setDisplayedText(fullText.slice(0, displayedText.length + 1));
-      }, 28);
-      return () => clearTimeout(timeout);
+  const handleQuestionAnswer = (option) => {
+    const next = [...answeredOptions, option];
+    setAnsweredOptions(next);
+
+    if (currentIndex + 1 < shownQuestions.length) {
+      setCurrentIndex(currentIndex + 1);
+    } else {
+      setPhase('final');
     }
-    setIsTyping(false);
-  }, [displayedText, fullText]);
+  };
 
-  return (
-    <main className="min-h-screen flex flex-col items-center justify-center px-4 py-12">
-      {/* Title — display font, big, with shadow */}
-      <h1 className="display-title text-2xl md:text-4xl mb-2 text-center">
-        findyourdistro
-      </h1>
-      <p className="font-body text-ink-dim text-sm md:text-base mb-12 tracking-widest uppercase">
-        a Mystery Dungeon-style test
-      </p>
+  const handleFinalAnswer = (option) => {
+    const id = calculateResult(answeredOptions, option.path);
+    setResultId(id);
+    setPhase('reveal');
+  };
 
-      {/* PMD-style dialogue box */}
-      <div className={`dialogue-box max-w-2xl w-full ${!isTyping ? 'dialogue-arrow' : ''}`}>
-        <p className="font-body text-lg md:text-xl leading-relaxed">
-          {displayedText}
-          {isTyping && <span className="text-cursor" aria-hidden="true" />}
-        </p>
-      </div>
+  const restart = () => {
+    setPhase('intro');
+    setShownQuestions([]);
+    setCurrentIndex(0);
+    setAnsweredOptions([]);
+    setResultId(null);
+  };
 
-      {/* Footer note (privacy-by-design statement) */}
-      <p className="mt-12 text-ink-dim text-xs md:text-sm text-center max-w-md font-body">
-        No cookies. No analytics. No tracking.
-        <br />
-        The entire test runs in your browser.
-      </p>
-    </main>
-  );
+  if (phase === 'intro') {
+    return <IntroScreen onStart={startQuiz} />;
+  }
+
+  if (phase === 'question') {
+    const question = shownQuestions[currentIndex];
+    return (
+      <QuestionScreen
+        key={question.id}
+        question={question}
+        index={currentIndex}
+        total={shownQuestions.length}
+        onAnswer={handleQuestionAnswer}
+      />
+    );
+  }
+
+  if (phase === 'final') {
+    return (
+      <FinalQuestionScreen
+        question={finalQuestion}
+        onAnswer={handleFinalAnswer}
+      />
+    );
+  }
+
+  // phase === 'reveal'
+  const reveal = resultId ? reveals[resultId] : null;
+  if (!reveal) {
+    // Should not happen, but degrade gracefully.
+    return <IntroScreen onStart={startQuiz} />;
+  }
+  return <RevealScreen reveal={reveal} onRestart={restart} />;
 }
