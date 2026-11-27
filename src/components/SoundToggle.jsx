@@ -2,7 +2,7 @@ import { useSound } from '../lib/SoundContext';
 
 /**
  * Small corner toggle that gates the typewriter blip and the optional
- * looping background music. Off by default; not persisted between visits.
+ * looping background music. On by default; not persisted between visits.
  */
 export default function SoundToggle() {
   const { enabled, toggle } = useSound();

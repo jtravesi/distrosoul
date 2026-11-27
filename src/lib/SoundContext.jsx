@@ -6,12 +6,14 @@ import { startTheme, stopTheme } from './musicTheme';
  * Global sound state.
  *
  * One toggle gates both the typewriter blip and the procedural background
- * theme. Off by default; deliberately not persisted between visits
- * (privacy rule — nothing leaves memory).
+ * theme. On by default, although browsers keep the AudioContext suspended
+ * until the first user interaction, so nothing plays before that.
+ * Deliberately not persisted between visits (privacy rule — nothing
+ * leaves memory).
  */
 
 const SoundContext = createContext({
-  enabled: false,
+  enabled: true,
   toggle: () => {},
   playBlip: () => {},
 });
