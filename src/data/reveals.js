@@ -1,5 +1,6 @@
 /**
- * Reveal texts — one entry per distro (22 total).
+ * Reveal texts: 23 entries for 22 distros (Pop!_OS has one under Serene
+ * and another under Dreamer).
  *
  * Shape per entry:
  *   {
