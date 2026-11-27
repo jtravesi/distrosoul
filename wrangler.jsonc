@@ -1,0 +1,11 @@
+// Cloudflare Workers configuration. The site is static: Workers Builds runs
+// `npm run build` and serves dist/ as assets, with no Worker script.
+{
+  "name": "distrosoul",
+  "compatibility_date": "2026-11-27",
+  "assets": {
+    "directory": "./dist",
+    // Unknown paths serve index.html, so deep links never 404.
+    "not_found_handling": "single-page-application"
+  }
+}

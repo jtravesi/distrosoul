@@ -5,7 +5,7 @@
 # Use this with compose.dev.yml. Source is mounted as a volume so
 # changes hot-reload via Vite. No build step here.
 
-FROM node:20-alpine
+FROM node:26-alpine
 
 WORKDIR /app
 

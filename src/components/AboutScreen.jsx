@@ -5,7 +5,7 @@ const PARAGRAPHS = [
   {
     en:
       "This is a small homage to the personality test that opens the " +
-      "Pokémon Mystery Dungeon games — and a way of thinking about " +
+      "Pokémon Mystery Dungeon games, and a way of thinking about " +
       "Linux distributions as companions rather than tools. The right " +
       "distro isn't the most popular or the most powerful. It's the " +
       "one that fits.",
@@ -19,7 +19,7 @@ const PARAGRAPHS = [
   {
     en:
       "All 22 distros in the pool are real, alive, and waiting. Take " +
-      "your time. There are no wrong answers — only ones that point " +
+      "your time. There are no wrong answers, only ones that point " +
       "at different parts of who you are.",
     es:
       "Las 22 distros del pool son reales, están vivas, y te esperan. " +
@@ -43,13 +43,13 @@ export default function AboutScreen({ onBack }) {
           {t(TITLE)}
         </h2>
 
-        <div className="font-body text-ink text-base md:text-lg leading-relaxed space-y-5">
+        <div className="font-body text-ink text-base leading-relaxed space-y-5">
           {PARAGRAPHS.map((p, i) => (
             <p key={i}>{t(p)}</p>
           ))}
         </div>
 
-        <p className="mt-10 text-center font-body text-ink-dim text-sm md:text-base">
+        <p className="mt-10 text-center font-body text-ink-dim text-sm">
           {t(MADE_BY)}{' '}
           <a
             href="https://github.com/jtravesi"

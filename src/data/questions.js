@@ -32,7 +32,7 @@ export const questions = [
     options: [
       {
         text: {
-          en: "I start assembling it by eye — I'll figure it out as I go.",
+          en: "I start assembling it by eye. I'll figure it out as I go.",
           es: "Empiezo a montarlo a ojo, ya iré viendo.",
         },
         points: { Restless: 2, Curious: 1 },
@@ -106,7 +106,7 @@ export const questions = [
     options: [
       {
         text: {
-          en: "I open it right away — curiosity wins.",
+          en: "I open it right away. Curiosity wins.",
           es: "La abro inmediatamente, ¡curiosidad!",
         },
         points: { Restless: 1, Curious: 2 },
@@ -205,7 +205,7 @@ export const questions = [
       },
       {
         text: {
-          en: "Something that respects your privacy — no accounts, no subscriptions, no connected devices.",
+          en: "Something that respects your privacy: no accounts, no subscriptions, no connected devices.",
           es: "Algo que respete tu privacidad: nada de cuentas, suscripciones ni dispositivos conectados.",
         },
         points: { Cautious: 2 },
@@ -279,7 +279,7 @@ export const questions = [
       },
       {
         text: {
-          en: "I take it in — the decor, the music. I just enjoy the atmosphere.",
+          en: "I take it in: the decor, the music. I just enjoy the atmosphere.",
           es: "Aprovecho para ver la decoración y la música, me gusta el ambiente.",
         },
         points: { Dreamer: 2 },
@@ -346,7 +346,7 @@ export const questions = [
       },
       {
         text: {
-          en: "Something visually stunning — the plot doesn't matter.",
+          en: "Something visually stunning. The plot doesn't matter.",
           es: "Una visualmente impresionante, da igual la trama.",
         },
         points: { Dreamer: 2 },
@@ -424,7 +424,7 @@ export const questions = [
       },
       {
         text: {
-          en: "Having style — caring about the details.",
+          en: "Having style: caring about the details.",
           es: "Que tenga estilo, que cuide los detalles.",
         },
         points: { Dreamer: 2 },
@@ -461,7 +461,7 @@ export const questions = [
       },
       {
         text: {
-          en: "I leave it where it is — I don't want any trouble.",
+          en: "I leave it where it is. I don't want any trouble.",
           es: "Lo dejo donde está, no quiero líos.",
         },
         points: { Cautious: 2 },
@@ -505,7 +505,7 @@ export const questions = [
       },
       {
         text: {
-          en: "I take care of it — clean it, keep it safe.",
+          en: "I take care of it: clean it, keep it safe.",
           es: "Lo cuido, lo limpio, lo mantengo a salvo.",
         },
         points: { Cautious: 1, Stoic: 1 },
@@ -562,7 +562,7 @@ export const questions = [
     options: [
       {
         text: {
-          en: "I sign up — sounds fun.",
+          en: "I sign up. Sounds fun.",
           es: "Me apunto, suena divertido.",
         },
         points: { Serene: 1, Restless: 1 },
@@ -583,7 +583,7 @@ export const questions = [
       },
       {
         text: {
-          en: "I say no — I'm done creating more accounts.",
+          en: "I say no. I'm done creating more accounts.",
           es: "Le digo que no, paso de crear más cuentas.",
         },
         points: { Cautious: 2, Stoic: 1 },
@@ -606,7 +606,7 @@ export const questions = [
       },
       {
         text: {
-          en: "Doing nothing special — just resting peacefully.",
+          en: "Doing nothing special, just resting peacefully.",
           es: "No hacer nada especial, solo descansar tranquilo.",
         },
         points: { Stoic: 2, Serene: 1 },
@@ -620,7 +620,7 @@ export const questions = [
       },
       {
         text: {
-          en: "Learning something new — reading, watching documentaries.",
+          en: "Learning something new: reading, watching documentaries.",
           es: "Aprender algo nuevo, leer, ver documentales.",
         },
         points: { Curious: 2 },
@@ -680,7 +680,7 @@ export const questions = [
       },
       {
         text: {
-          en: "A comfortable, normal house — no complications.",
+          en: "A comfortable, normal house. No complications.",
           es: "Una casa cómoda y normal, sin complicaciones.",
         },
         points: { Serene: 2 },

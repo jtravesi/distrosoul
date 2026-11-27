@@ -13,7 +13,14 @@ import { useSound } from '../lib/SoundContext';
  *   - `onDone` fires once when typing completes (for callers that want
  *     to reveal choices or chain into another step).
  */
-export default function TextBox({
+export default function TextBox(props) {
+  // Remount on every new text (including a language switch mid-typing) so
+  // the typewriter state starts fresh instead of being reset in an effect,
+  // which raced with the completion check and could fire onDone early.
+  return <Typewriter key={props.text} {...props} />;
+}
+
+function Typewriter({
   text,
   speed = 28,
   onContinue,
@@ -24,11 +31,6 @@ export default function TextBox({
   const [displayed, setDisplayed] = useState('');
   const [done, setDone] = useState(false);
   const { playBlip } = useSound();
-
-  useEffect(() => {
-    setDisplayed('');
-    setDone(false);
-  }, [text]);
 
   useEffect(() => {
     if (displayed.length < text.length) {
@@ -75,7 +77,7 @@ export default function TextBox({
         isInteractive ? 'cursor-pointer' : ''
       } ${showArrow ? 'dialogue-arrow' : ''} ${className}`.trim()}
     >
-      <p className="font-body text-lg md:text-xl leading-relaxed">
+      <p className="font-body text-base leading-relaxed">
         {displayed}
         {showCursor && !done && <span className="text-cursor" aria-hidden="true" />}
       </p>

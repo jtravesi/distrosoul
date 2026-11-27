@@ -28,7 +28,7 @@ export default function IntroScreen({ onStart, onAbout }) {
       <h1 className="display-title text-2xl md:text-4xl mb-2 text-center">
         distrosoul
       </h1>
-      <p className="font-body text-ink-dim text-sm md:text-base mb-12 tracking-widest uppercase">
+      <p className="font-body text-ink-dim text-xs md:text-sm mb-12 tracking-widest">
         {t(SUBTITLE)}
       </p>
 
@@ -38,7 +38,7 @@ export default function IntroScreen({ onStart, onAbout }) {
         <button
           type="button"
           onClick={onAbout}
-          className="fixed top-3 left-3 z-50 font-body text-sm md:text-base
+          className="fixed top-3 left-3 z-50 font-body text-xs md:text-sm
                      px-3 py-1 border-2 border-border-dim text-ink-dim
                      hover:text-ink hover:border-ink transition-colors
                      focus:outline-none focus-visible:border-ink focus-visible:text-ink"
