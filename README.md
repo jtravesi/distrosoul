@@ -103,7 +103,7 @@ node scripts/coverage.mjs --runs 50000  # bigger sample
 
 ## Deployment
 
-The live site is deployed by **Cloudflare Workers Builds**: every push to `main` builds the app and publishes `dist/`. The build settings live in the Cloudflare dashboard, not in this repo.
+The live site is deployed by **Cloudflare Workers Builds**: every push to `main` builds the app and publishes `dist/`, and other branches upload a preview version. [`wrangler.jsonc`](wrangler.jsonc) defines how the site is served (static assets with a single-page-app fallback); the build and deploy commands are set in the Cloudflare dashboard.
 
 Security headers (CSP, framing, referrer and permissions policies) are defined twice, once for each way of serving the site:
 
@@ -143,6 +143,7 @@ distrosoul/
 │   ├── main.jsx                     # React entry point
 │   └── index.css                    # Tailwind + PMD styles + background
 ├── public/_headers                  # Security headers for Cloudflare
+├── wrangler.jsonc                   # Cloudflare Workers config (assets + SPA fallback)
 ├── scripts/coverage.mjs             # Reachability + distribution check (npm test)
 ├── docker/nginx.conf                # Hardened nginx config for self-hosting
 ├── Dockerfile / docker-compose.yml  # Production image (nginx-alpine)

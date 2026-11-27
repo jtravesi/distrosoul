@@ -48,3 +48,6 @@ coverage/
 .cache/
 .temp/
 .tmp/
+
+# Wrangler local state
+.wrangler/
