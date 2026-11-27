@@ -77,7 +77,7 @@ function Typewriter({
         isInteractive ? 'cursor-pointer' : ''
       } ${showArrow ? 'dialogue-arrow' : ''} ${className}`.trim()}
     >
-      <p className="font-body text-lg md:text-xl leading-relaxed">
+      <p className="font-body text-base leading-relaxed">
         {displayed}
         {showCursor && !done && <span className="text-cursor" aria-hidden="true" />}
       </p>

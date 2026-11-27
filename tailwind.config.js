@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        // Body font (pixel sans, readable for long text)
-        body: ['"Pixelify Sans"', 'system-ui', 'sans-serif'],
+        // Body font (pixel, readable for long text; declared in index.css)
+        body: ['"Pixel Operator 8"', 'system-ui', 'sans-serif'],
         // Display font (arcade, for titles and reveals)
         display: ['"Press Start 2P"', 'monospace'],
       },

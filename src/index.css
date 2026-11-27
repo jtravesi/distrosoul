@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Body font, bundled with the app. Pixel Operator 8 by Jayvee Enaguas,
+   CC0 (see src/assets/fonts/PixelOperator-LICENSE.txt). It is drawn on an
+   8px grid, so it looks sharpest at multiples of 8px (16px for body text). */
+@font-face {
+  font-family: 'Pixel Operator 8';
+  src: url('./assets/fonts/PixelOperator8.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   html {
     background-color: theme('colors.bg.deep');
@@ -111,7 +122,7 @@
   .choice-button {
     @apply w-full text-left px-4 py-3 sm:px-5 md:px-6 md:py-4
            bg-bg-panel border-2 border-border-dim text-ink
-           font-body text-base sm:text-lg md:text-xl
+           font-body text-sm md:text-base
            transition-all duration-150 ease-out
            hover:border-ink hover:bg-bg hover:text-accent-gold
            hover:translate-x-1

@@ -15,7 +15,7 @@ export default function LanguageToggle() {
       type="button"
       onClick={toggle}
       aria-label={isSpanish ? 'Switch to English' : 'Cambiar a español'}
-      className="fixed top-3 right-20 z-50 font-body text-sm md:text-base
+      className="fixed top-3 right-20 z-50 font-body text-xs md:text-sm
                  px-3 py-1 border-2 border-border-dim text-ink-dim
                  hover:text-ink hover:border-ink transition-colors
                  focus:outline-none focus-visible:border-ink focus-visible:text-ink"

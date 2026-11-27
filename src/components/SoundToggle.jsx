@@ -17,7 +17,7 @@ export default function SoundToggle() {
       onClick={toggle}
       aria-pressed={enabled}
       aria-label={t(enabled ? MUTE : UNMUTE)}
-      className={`fixed top-3 right-3 z-50 font-body text-sm md:text-base
+      className={`fixed top-3 right-3 z-50 font-body text-xs md:text-sm
                   px-3 py-1 border-2 transition-colors
                   focus:outline-none focus-visible:border-accent-gold focus-visible:text-accent-gold
                   ${enabled

@@ -62,7 +62,7 @@ export default function RevealScreen({ reveal, onRestart }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
           >
-            <p className="font-body text-ink-dim text-xs md:text-sm tracking-widest uppercase mb-2">
+            <p className="font-body text-ink-dim text-xs tracking-widest uppercase mb-2">
               {t(YOU_ARE)}
             </p>
             <h2 className="display-title text-xl md:text-3xl">
@@ -113,7 +113,7 @@ export default function RevealScreen({ reveal, onRestart }) {
             {reveal.distroName}
           </motion.h2>
           <motion.p
-            className="font-body text-ink-dim text-sm md:text-base text-center max-w-xl"
+            className="font-body text-ink-dim text-sm text-center max-w-xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}

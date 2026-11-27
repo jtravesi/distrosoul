@@ -43,13 +43,13 @@ export default function AboutScreen({ onBack }) {
           {t(TITLE)}
         </h2>
 
-        <div className="font-body text-ink text-base md:text-lg leading-relaxed space-y-5">
+        <div className="font-body text-ink text-base leading-relaxed space-y-5">
           {PARAGRAPHS.map((p, i) => (
             <p key={i}>{t(p)}</p>
           ))}
         </div>
 
-        <p className="mt-10 text-center font-body text-ink-dim text-sm md:text-base">
+        <p className="mt-10 text-center font-body text-ink-dim text-sm">
           {t(MADE_BY)}{' '}
           <a
             href="https://github.com/jtravesi"

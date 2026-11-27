@@ -16,6 +16,7 @@
     "test": "node scripts/coverage.mjs"
   },
   "dependencies": {
+    "@fontsource/press-start-2p": "^5.3.0",
     "framer-motion": "^11.18.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
