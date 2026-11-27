@@ -5,7 +5,7 @@ const PARAGRAPHS = [
   {
     en:
       "This is a small homage to the personality test that opens the " +
-      "Pokémon Mystery Dungeon games — and a way of thinking about " +
+      "Pokémon Mystery Dungeon games, and a way of thinking about " +
       "Linux distributions as companions rather than tools. The right " +
       "distro isn't the most popular or the most powerful. It's the " +
       "one that fits.",
@@ -19,7 +19,7 @@ const PARAGRAPHS = [
   {
     en:
       "All 22 distros in the pool are real, alive, and waiting. Take " +
-      "your time. There are no wrong answers — only ones that point " +
+      "your time. There are no wrong answers, only ones that point " +
       "at different parts of who you are.",
     es:
       "Las 22 distros del pool son reales, están vivas, y te esperan. " +
