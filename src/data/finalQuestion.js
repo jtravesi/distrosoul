@@ -40,7 +40,7 @@ export const finalQuestion = {
     },
     {
       text: {
-        en: "Knowing there's no rush — the road is mine.",
+        en: "Knowing there's no rush: the road is mine.",
         es: "Saber que no hay prisa, que el camino es mío.",
       },
       path: 'pace',
