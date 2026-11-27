@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 /**
  * Language state.
@@ -26,6 +26,11 @@ const LanguageContext = createContext({
 
 export function LanguageProvider({ children }) {
   const [lang, setLang] = useState(detectInitial);
+
+  // Keep <html lang> in sync so screen readers pick the right voice.
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
 
   const t = (field) => {
     if (field == null) return '';
